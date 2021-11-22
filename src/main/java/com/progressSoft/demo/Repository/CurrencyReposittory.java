@@ -13,10 +13,5 @@ public interface CurrencyReposittory extends JpaRepository<Currency,Long > {
     Optional<Currency> findCurrencyByFromCurrencyISO (String fromCurrencyISO);
     Optional<Currency> findCurrencyByToCurrencyISO (String toCurrencyISO);
     Optional<Currency> findCurrencyById (Long id);
-//    List<Currency> findByfCurrencyISOCodeAndtCurrencyISOCodeAndAmount(
-//            @Param("findCurrencyByAmount")  Double  amount ,
-//            @Param("findCurrencyByFromCurrencyISO")  String findCurrencyByFromCurrencyISO,
-//            @Param("findCurrencyByToCurrencyISO")  String findCurrencyByToCurrencyISO
-//
-//    );
+
 }

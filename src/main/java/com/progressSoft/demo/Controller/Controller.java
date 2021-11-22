@@ -3,6 +3,7 @@ package com.progressSoft.demo.Controller;
 import com.progressSoft.demo.Repository.CurrencyReposittory;
 import com.progressSoft.demo.domain.Currency;
 import com.progressSoft.demo.domain.CurrencyDTO;
+import com.progressSoft.demo.exception.DealNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,40 +51,16 @@ public class Controller {
 
     @ResponseBody
     @GetMapping(value = "deals/{id}")
-    public Currency getValue(@PathVariable Long id) {
+    public Currency getValue(@PathVariable Long id) throws DealNotFoundException {
         logger.info("start calling to get data from database");
         Optional<Currency> currency = currencyReposittory.findCurrencyById(id);
 
         if (currency.isPresent())
             return currency.get();
-        else throw new RuntimeException("DEAL_IS_NOT_FOUND");
-// return currency.get();
+        else throw new DealNotFoundException("DEAL_IS_NOT_FOUND");
+
     }
 
 
 }
-//  List<Currency> currency1=new Currency(currencyReposittory.findById(currency.getId()))
-//  List<Currency> currency1 =currencyReposittory
-//          .findByfCurrencyISOCodeAndtCurrencyISOCodeAndAmount(currency.getAmount(),
-//                  currency.getFromCurrencyISO(),currency.getToCurrencyISO());
 
-
-////     Currency currency1= new
-////             Currency(currency.getId(),
-////             LocalDateTime.now(),
-////             currency.getFromCurrencyISO(),
-////             currency.getToCurrencyISO(),
-////             currency.getAmount());
-//  if(!currency1.isEmpty()){
-//   logger.info("the deals already saved");
-//   return new ResponseEntity("the deals already saved",HttpStatus.OK);
-//  }else {
-//        Currency currency2= new
-//             Currency(currency.getId(),
-//             LocalDateTime.now(),
-//             currency.getFromCurrencyISO(),
-//             currency.getToCurrencyISO(),
-//             currency.getAmount());
-//   return new ResponseEntity(currencyReposittory.save(currency2), HttpStatus.CREATED);
-//
-//  }
